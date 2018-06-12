@@ -5,3 +5,7 @@ variable "region" {
 variable "sns_notify" {
   default = false
 }
+
+variable "name_prefix" {
+  default = ""
+}

@@ -1,7 +1,7 @@
 
 resource "aws_iam_role_policy" "codedeploy_policy_sns" {
     count = "${var.sns_notify ? 1 : 0}"
-    name = "codedeploy"
+    name = "${var.name_prefix}-codedeploy"
     role = "${aws_iam_role.codedeploy_role.id}"
     policy = <<EOF
 {
@@ -32,7 +32,7 @@ EOF
 
 resource "aws_iam_role_policy" "codedeploy_policy" {
     count = "${var.sns_notify ? 0 : 1}"
-    name = "codedeploy"
+    name = "${var.name_prefix}-codedeploy"
     role = "${aws_iam_role.codedeploy_role.id}"
     policy = <<EOF
 {
@@ -61,7 +61,7 @@ EOF
 }
 
 resource "aws_iam_role" "codedeploy_role" {
-    name = "codedeploy-role"
+    name = "${var.name_prefix}-codedeploy-role"
     assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
